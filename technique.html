@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dossier Technique - SAE S1.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">SAE S1.03</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="equipe.html">Notre Équipe</a></li>
+                <li class="nav-item"><a class="nav-link active" href="technique.html">Dossier Technique</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="hero-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Dossier d'Étude & Choix</h1>
+        <p class="lead">Justification de l'installation et réponses théoriques</p>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+
+            <div class="accordion shadow-sm" id="accordionRapport">
+
+                <div class="accordion-item border-0 mb-2 rounded overflow-hidden">
+                    <h2 class="accordion-header" id="headingVM">
+                        <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVM">
+                            <i class="bi bi-pc-display text-primary me-3 fs-5"></i>
+                            1. Configuration de la Machine Virtuelle
+                        </button>
+                    </h2>
+                    <div id="collapseVM" class="accordion-collapse collapse show" data-bs-parent="#accordionRapport">
+                        <div class="accordion-body bg-white text-muted">
+                            <p><strong>Configuration :</strong> Ubuntu Server 24.04 (64-bit).</p>
+                            <div class="alert alert-light border">
+                                <strong>Pourquoi ces choix ?</strong>
+                                <p class="small mb-0">
+                                    Nous avons alloué <strong>4 Processeurs</strong> et <strong>8 Go de RAM</strong>. C'est plus que le minimum requis, mais cela garantit que la VM ne ralentit jamais lors de l'installation des paquets. <br>
+                                    Pour le stockage, j'ai prévu <strong>45 Go</strong> : Ubuntu en prend environ 10, le reste est dédié au site web et offre une <strong>marge de sécurité</strong> confortable pour les logs et les mises à jour système.
+                                </p>
+                            </div>
+                            <img src="preuve_vm.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve Configuration VM">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-2 rounded overflow-hidden">
+                    <h2 class="accordion-header" id="headingSysteme">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSysteme">
+                            <i class="bi bi-terminal text-secondary me-3 fs-5"></i>
+                            2. Gestion des Utilisateurs & Terminal
+                        </button>
+                    </h2>
+                    <div id="collapseSysteme" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
+                        <div class="accordion-body bg-white text-muted">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Création de l'utilisateur</h6>
+                                    <p class="small"><strong>Explication :</strong> C'est dangereux pour la sécurité de rester connecté en "root" tout le temps. Nous avons donc créé un utilisateur standard avec le nom imposé (`trinomeXX`) pour travailler proprement.</p>
+                                    <img src="preuve_user.png" class="img-fluid rounded border shadow-sm mb-3" alt="Preuve User">
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Couleurs du Terminal</h6>
+                                    <p class="small"><strong>Explication :</strong> Nous avons modifié le fichier <code>.bashrc</code> pour mettre de la couleur. C'est plus pratique pour voir tout de suite si on est en utilisateur simple ou en admin, et ça évite les erreurs.</p>
+                                    <img src="preuve_bash.png" class="img-fluid rounded border shadow-sm" alt="Preuve Bash">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-2 rounded overflow-hidden">
+                    <h2 class="accordion-header" id="headingWeb">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWeb">
+                            <i class="bi bi-server text-danger me-3 fs-5"></i>
+                            3. Installation du Serveur Web
+                        </button>
+                    </h2>
+                    <div id="collapseWeb" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
+                        <div class="accordion-body bg-white text-muted">
+                            <p><strong>Logiciel installé :</strong> Apache2.</p>
+                            <div class="alert alert-light border">
+                                <strong>A quoi ça sert ?</strong>
+                                <p class="small mb-0">C'est le logiciel principal du projet. Il transforme ma machine virtuelle en un vrai serveur web capable d'afficher nos pages HTML. Il a été installé simplement avec la commande <code>apt install</code>.</p>
+                            </div>
+                            <img src="preuve_install.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve installation Apache">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-2 rounded overflow-hidden">
+                    <h2 class="accordion-header" id="headingNetwork">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNetwork">
+                            <i class="bi bi-hdd-network text-success me-3 fs-5"></i>
+                            4. Réseau et Permissions
+                        </button>
+                    </h2>
+                    <div id="collapseNetwork" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
+                        <div class="accordion-body bg-white text-muted">
+                            <div class="alert alert-light border">
+                                <strong>Nos actions :</strong>
+                                <ul class="small mb-0">
+                                    <li><strong>Mode Pont (Bridge) :</strong> Activé pour que la VM ait une vraie adresse IP sur le réseau local. C'est ce qui permet à Windows de communiquer avec elle.</li>
+                                    <li><strong>Commande Chown :</strong> De base, le dossier du site appartient à root. Nous avons dû changer le propriétaire (avec <code>chown</code>) pour avoir le droit de modifier les fichiers HTML.</li>
+                                </ul>
+                            </div>
+                            <img src="preuve_ip.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve IP et Chown">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-2 rounded overflow-hidden">
+                    <h2 class="accordion-header" id="headingDev">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDev">
+                            <i class="bi bi-laptop text-info me-3 fs-5"></i>
+                            5. Outils de Développement
+                        </button>
+                    </h2>
+                    <div id="collapseDev" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
+                        <div class="accordion-body bg-white text-muted">
+                            <p><strong>Outil utilisé :</strong> WebStorm (Windows).</p>
+                            <div class="alert alert-light border">
+                                <strong>Pourquoi ?</strong>
+                                <p class="small mb-0">Coder directement dans le terminal noir de Linux, c'est compliqué. Nous avons configuré une connexion <strong>SFTP</strong> pour pouvoir coder confortablement sur Windows et envoyer les fichiers automatiquement sur le serveur.</p>
+                            </div>
+                            <img src="preuve_ssh.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve configuration SSH">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-2 rounded overflow-hidden">
+                    <h2 class="accordion-header" id="headingTheory">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTheory">
+                            <i class="bi bi-book text-warning me-3 fs-5"></i>
+                            6. Réponses aux Questions Théoriques
+                        </button>
+                    </h2>
+                    <div id="collapseTheory" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
+                        <div class="accordion-body bg-white text-muted">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>1. Définition de la virtualisation :</strong><br>
+                                    La virtualisation est une technologie qui permet de créer des versions virtuelles d'une ressource informatique (ordinateur, stockage) à partir d'une seule machine physique. Cela nous a permis d'installer Ubuntu sans toucher à notre Windows principal.
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>2. Différence Émulateur vs Virtualisation :</strong><br>
+                                    Un <em>émulateur</em> imite tout le matériel de façon logicielle (c'est lent). La <em>virtualisation</em> utilise directement la puissance réelle du processeur (c'est rapide et performant).
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>3. Type de virtualisation (VirtualBox) :</strong><br>
+                                    VirtualBox est un hyperviseur de <strong>Type 2</strong> (Hosted). Il s'installe comme une application classique sur notre système d'exploitation hôte (Windows), contrairement aux hyperviseurs de Type 1 (Bare-metal) qui s'installent directement sur le matériel.
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>4. Sauvegarde de la VM :</strong><br>
+                                    La machine virtuelle est stockée sous forme de fichiers (principalement un disque virtuel <code>.vdi</code>). Ces fichiers sont sauvegardés localement sur le disque dur de l'ordinateur hôte (dans le dossier Utilisateur de Windows).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm p-5 mb-5 rounded-4">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <h2 class="fw-bold mb-3">Planning (Gantt)</h2>
+                <p class="text-muted">Organisation de mon travail sur la période.</p>
+            </div>
+            <div class="col-lg-8">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center align-middle shadow-sm" style="font-size: 0.9rem;">
+                        <thead class="table-dark small">
+                        <tr>
+                            <th style="width: 30%; text-align: left;">Tâches / Semaines</th>
+                            <th style="width: 17.5%;">Semaine 1<br><small class="text-muted">Découverte</small></th>
+                            <th style="width: 17.5%;">Semaine 2<br><small class="text-muted">Install.</small></th>
+                            <th style="width: 17.5%;">Semaine 3<br><small class="text-muted">Config.</small></th>
+                            <th style="width: 17.5%;">Semaine 4<br><small class="text-muted">Rendu</small></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="fw-bold text-start">1. Installation VM & OS Ubuntu</td>
+                            <td class="bg-danger text-white rounded-3 shadow-sm" colspan="2">Jules (Installation & OS)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">2. Gestion Utilisateurs & Bash</td>
+                            <td></td>
+                            <td class="bg-primary text-white rounded-3 shadow-sm">Yassine</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">3. Config. Réseau & Apache</td>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-primary text-white rounded-3 shadow-sm">Yassine</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">4. Dev. Site Web (HTML/CSS)</td>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-success text-white rounded-3 shadow-sm" colspan="2">Idir (Maquettage & Code)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">5. Déploiement SFTP & Tests</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-secondary text-white rounded-3 shadow-sm">Équipe complète</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-start">6. Rédaction Dossier Technique</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-primary text-white rounded-3 shadow-sm">Yassine</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 small text-muted fst-italic text-center">
+                    Légende : <span class="badge bg-primary me-1">Yassine</span> <span class="badge bg-danger me-1">Jules</span> <span class="badge bg-success me-1">Idir</span> <span class="badge bg-secondary me-1">Équipe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="text-white text-center py-4">
+    <p class="mb-0">© 2026 SAÉ S1.03 | Yassine, Jules & Idir</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
