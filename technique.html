@@ -25,7 +25,7 @@
 <header class="hero-header text-center">
     <div class="container">
         <h1 class="display-4 fw-bold">Dossier d'Étude & Choix</h1>
-        <p class="lead">Justification de l'installation et réponses théoriques</p>
+        <p class="lead">Mes choix d'installation et réponses aux questions</p>
     </div>
 </header>
 
@@ -40,20 +40,40 @@
                     <h2 class="accordion-header" id="headingVM">
                         <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVM">
                             <i class="bi bi-pc-display text-primary me-3 fs-5"></i>
-                            1. Configuration de la Machine Virtuelle
+                            1. Configuration et Justification des Choix (Q5)
                         </button>
                     </h2>
                     <div id="collapseVM" class="accordion-collapse collapse show" data-bs-parent="#accordionRapport">
                         <div class="accordion-body bg-white text-muted">
-                            <p><strong>Configuration :</strong> Ubuntu Server 24.04 (64-bit).</p>
-                            <div class="alert alert-light border">
-                                <strong>Pourquoi ces choix ?</strong>
-                                <p class="small mb-0">
-                                    Nous avons alloué <strong>4 Processeurs</strong> et <strong>8 Go de RAM</strong>. C'est plus que le minimum requis, mais cela garantit que la VM ne ralentit jamais lors de l'installation des paquets. <br>
-                                    Pour le stockage, j'ai prévu <strong>45 Go</strong> : Ubuntu en prend environ 10, le reste est dédié au site web et offre une <strong>marge de sécurité</strong> confortable pour les logs et les mises à jour système.
-                                </p>
+                            <p>Pour répondre aux exigences de performance du projet, voici les choix techniques que j'ai retenus pour la configuration de la machine virtuelle :</p>
+
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">
+                                    <strong>1. Système d'exploitation : Ubuntu Server</strong><br>
+                                    <span class="small">Mon choix s'est porté sur la version "Server" (dépourvue d'interface graphique). Cette version permet d'optimiser les ressources système et de se rapprocher des conditions réelles d'administration en entreprise (gestion stricte en ligne de commande).</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>2. Processeurs : 4 CPU</strong><br>
+                                    <span class="small">J'ai augmenté la configuration par défaut pour allouer <strong>4 processeurs virtuels</strong>. Cette puissance de calcul supplémentaire garantit l'absence de latence lors de l'exécution de tâches simultanées (installation de paquets, compilation) et assure une réactivité optimale du serveur.</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>3. Mémoire RAM : 8192 Mo (8 Go)</strong><br>
+                                    <span class="small">J'ai défini une allocation confortable de <strong>8 Go de mémoire vive</strong>. Ce dimensionnement permet de prévenir tout recours à la mémoire Swap (plus lente) et assure une fluidité parfaite des services, même en cas de forte sollicitation du serveur Apache.</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>4. Stockage : Disque VDI Dynamique (45 Go)</strong><br>
+                                    <span class="small">L'allocation dynamique a été privilégiée par rapport à la taille fixe. Ce choix technique permet d'économiser l'espace disque de l'hôte, car le fichier de la VM n'occupe que l'espace réellement utilisé par les données du système, sans réserver inutilement 45 Go.</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>5. Réseau : Accès par Pont (Bridge)</strong><br>
+                                    <span class="small">Le mode "Accès par Pont" a été sélectionné impérativement. Contrairement au mode NAT qui isole la VM, ce mode lui permet d'obtenir sa propre adresse IP sur le réseau local, la rendant ainsi directement accessible depuis le navigateur de l'ordinateur hôte.</span>
+                                </li>
+                            </ul>
+
+                            <div class="text-center">
+                                <img src="preuve_vm.png" class="img-fluid rounded border shadow-sm img-preuve-fit mb-2" alt="Preuve Configuration VM">
+                                <p class="small text-muted fst-italic">Capture d'écran validant l'allocation des ressources (4 CPU, 8 Go RAM).</p>
                             </div>
-                            <img src="preuve_vm.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve Configuration VM">
                         </div>
                     </div>
                 </div>
@@ -70,12 +90,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6>Création de l'utilisateur</h6>
-                                    <p class="small"><strong>Explication :</strong> C'est dangereux pour la sécurité de rester connecté en "root" tout le temps. Nous avons donc créé un utilisateur standard avec le nom imposé (`trinomeXX`) pour travailler proprement.</p>
+                                    <p class="small">Pour la sécurité, il ne faut jamais travailler en tant que "root" (le super-administrateur). J'ai donc créé un utilisateur standard avec mon nom de groupe pour administrer le serveur proprement (via la commande <code>sudo</code>).</p>
                                     <img src="preuve_user.png" class="img-fluid rounded border shadow-sm mb-3" alt="Preuve User">
                                 </div>
                                 <div class="col-md-6">
                                     <h6>Couleurs du Terminal</h6>
-                                    <p class="small"><strong>Explication :</strong> Nous avons modifié le fichier <code>.bashrc</code> pour mettre de la couleur. C'est plus pratique pour voir tout de suite si on est en utilisateur simple ou en admin, et ça évite les erreurs.</p>
+                                    <p class="small">J'ai modifié le fichier <code>.bashrc</code> pour ajouter de la couleur à l'invite de commande. C'est pratique pour identifier immédiatement qui est connecté et cela rend le terminal plus lisible et agréable.</p>
                                     <img src="preuve_bash.png" class="img-fluid rounded border shadow-sm" alt="Preuve Bash">
                                 </div>
                             </div>
@@ -94,8 +114,8 @@
                         <div class="accordion-body bg-white text-muted">
                             <p><strong>Logiciel installé :</strong> Apache2.</p>
                             <div class="alert alert-light border">
-                                <strong>A quoi ça sert ?</strong>
-                                <p class="small mb-0">C'est le logiciel principal du projet. Il transforme ma machine virtuelle en un vrai serveur web capable d'afficher nos pages HTML. Il a été installé simplement avec la commande <code>apt install</code>.</p>
+                                <strong>À quoi ça sert ?</strong>
+                                <p class="small mb-0">Apache est le serveur HTTP le plus utilisé. C'est le logiciel qui écoute les requêtes sur le port 80 et renvoie mes fichiers HTML. Je l'ai installé et activé avec la commande <code>apt install apache2</code>.</p>
                             </div>
                             <img src="preuve_install.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve installation Apache">
                         </div>
@@ -112,10 +132,10 @@
                     <div id="collapseNetwork" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
                         <div class="accordion-body bg-white text-muted">
                             <div class="alert alert-light border">
-                                <strong>Nos actions :</strong>
+                                <strong>Mes actions :</strong>
                                 <ul class="small mb-0">
-                                    <li><strong>Mode Pont (Bridge) :</strong> Activé pour que la VM ait une vraie adresse IP sur le réseau local. C'est ce qui permet à Windows de communiquer avec elle.</li>
-                                    <li><strong>Commande Chown :</strong> De base, le dossier du site appartient à root. Nous avons dû changer le propriétaire (avec <code>chown</code>) pour avoir le droit de modifier les fichiers HTML.</li>
+                                    <li><strong>Mode Pont (Bridge) :</strong> Comme expliqué précédemment, ce réglage permet à la VM d'être accessible sur le réseau local, simulant ainsi un serveur physique.</li>
+                                    <li><strong>Changer les droits (Chown) :</strong> Par défaut, le dossier <code>/var/www/html</code> appartient à root. J'ai utilisé la commande <code>chown</code> pour m'attribuer la propriété du dossier et pouvoir modifier les fichiers sans erreur de permission.</li>
                                 </ul>
                             </div>
                             <img src="preuve_ip.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve IP et Chown">
@@ -132,10 +152,10 @@
                     </h2>
                     <div id="collapseDev" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
                         <div class="accordion-body bg-white text-muted">
-                            <p><strong>Outil utilisé :</strong> WebStorm (Windows).</p>
+                            <p><strong>Outil utilisé :</strong> WebStorm sur Windows.</p>
                             <div class="alert alert-light border">
                                 <strong>Pourquoi ?</strong>
-                                <p class="small mb-0">Coder directement dans le terminal noir de Linux, c'est compliqué. Nous avons configuré une connexion <strong>SFTP</strong> pour pouvoir coder confortablement sur Windows et envoyer les fichiers automatiquement sur le serveur.</p>
+                                <p class="small mb-0">L'édition de code directement dans le terminal Linux étant fastidieuse, j'ai configuré une connexion SFTP sur WebStorm. Cela me permet de développer confortablement sur Windows et de synchroniser les fichiers instantanément sur le serveur.</p>
                             </div>
                             <img src="preuve_ssh.png" class="img-fluid rounded border shadow-sm img-preuve-fit" alt="Preuve configuration SSH">
                         </div>
@@ -152,26 +172,37 @@
                     <div id="collapseTheory" class="accordion-collapse collapse" data-bs-parent="#accordionRapport">
                         <div class="accordion-body bg-white text-muted">
                             <ul class="list-group list-group-flush">
+
                                 <li class="list-group-item">
                                     <strong>1. Définition de la virtualisation :</strong><br>
-                                    La virtualisation est une technologie qui permet de créer des versions virtuelles d'une ressource informatique (ordinateur, stockage) à partir d'une seule machine physique. Cela nous a permis d'installer Ubuntu sans toucher à notre Windows principal.
+                                    C'est une technologie permettant de créer des versions virtuelles de ressources informatiques (ordinateur, stockage). Elle permet de faire fonctionner plusieurs systèmes d'exploitation (comme Ubuntu) sur une seule machine physique hôte, en partageant les ressources matérielles.
                                 </li>
+
                                 <li class="list-group-item">
                                     <strong>2. Différence Émulateur vs Virtualisation :</strong><br>
-                                    Un <em>émulateur</em> imite tout le matériel de façon logicielle (c'est lent). La <em>virtualisation</em> utilise directement la puissance réelle du processeur (c'est rapide et performant).
+                                    Un <em>émulateur</em> imite le matériel de façon logicielle (traduction d'instructions), ce qui est lent. La <em>virtualisation</em> utilise directement le processeur physique grâce à l'hyperviseur, offrant des performances quasi-natives.
                                 </li>
+
                                 <li class="list-group-item">
                                     <strong>3. Type de virtualisation (VirtualBox) :</strong><br>
-                                    VirtualBox est un hyperviseur de <strong>Type 2</strong> (Hosted). Il s'installe comme une application classique sur notre système d'exploitation hôte (Windows), contrairement aux hyperviseurs de Type 1 (Bare-metal) qui s'installent directement sur le matériel.
+                                    VirtualBox est un hyperviseur de <strong>Type 2 (Hosted)</strong>. Il s'installe comme une application classique sur un système d'exploitation existant (Windows). À l'inverse, un hyperviseur de Type 1 (Bare-metal) s'installerait directement sur le matériel sans OS intermédiaire.
                                 </li>
+
                                 <li class="list-group-item">
-                                    <strong>4. Sauvegarde de la VM :</strong><br>
-                                    La machine virtuelle est stockée sous forme de fichiers (principalement un disque virtuel <code>.vdi</code>). Ces fichiers sont sauvegardés localement sur le disque dur de l'ordinateur hôte (dans le dossier Utilisateur de Windows).
+                                    <strong>4. Où est sauvegardée la VM ?</strong><br>
+                                    La machine virtuelle est stockée localement sur mon disque dur physique, généralement dans le dossier utilisateur. Elle se compose de fichiers de configuration (<code>.vbox</code>) et de disque virtuel (<code>.vdi</code>).
                                 </li>
+
+                                <li class="list-group-item bg-light border-start border-4 border-primary">
+                                    <strong>5. Justification des choix techniques :</strong><br>
+                                    J'ai détaillé et justifié l'intégralité de mes choix techniques (OS Serveur, RAM, Processeurs, Réseau Bridge) dans la partie <strong><a href="#headingVM" class="text-decoration-none">1. Configuration et Justification</a></strong> située au début de ce dossier, appuyée par les captures d'écran.
+                                </li>
+
                             </ul>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -180,7 +211,7 @@
         <div class="row align-items-center">
             <div class="col-lg-4">
                 <h2 class="fw-bold mb-3">Planning (Gantt)</h2>
-                <p class="text-muted">Organisation de mon travail sur la période.</p>
+                <p class="text-muted">Organisation du travail de groupe.</p>
             </div>
             <div class="col-lg-8">
                 <div class="table-responsive">
