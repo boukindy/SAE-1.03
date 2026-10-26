@@ -8,7 +8,7 @@ Partir de zéro : créer une machine virtuelle, la configurer et y héberger un 
 
 ## Mon rôle
 
-Chef de projet et administrateur système.
+Chef de projet. J'ai réalisé l'ensemble de la partie technique du projet.
 
 ## Ce qui a été fait
 
@@ -17,7 +17,7 @@ Chef de projet et administrateur système.
 - Personnalisation du terminal (`.bashrc`) pour distinguer le compte administrateur des comptes standards
 - Installation du serveur web **Apache2** et correction d'un problème de droits sur `/var/www/html` avec `chown`
 - Passage de la carte réseau en **mode pont** pour rendre le site accessible sur le réseau local
-- Déploiement du site de l'équipe (Bootstrap 5) sur le serveur via **SFTP** depuis WebStorm
+- Réalisation du site (Bootstrap 5) et déploiement sur le serveur via **SFTP** depuis WebStorm
 
 ## Captures
 
